@@ -37,7 +37,7 @@ navbar:
     - icon: fa-github fa-lg
       href: "https://github.com/ZizhiXia/p8105_2025final"
     - icon: fa-youtube fa-lg
-      href: "#"
+      href: "https://youtu.be/4YGVzvdbU1g"
 
 output:
   html_document:
