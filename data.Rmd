@@ -1,0 +1,123 @@
+---
+title: "Data"
+output:
+  html_document:
+    theme: cosmo
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    css: styles.css
+---
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Wait until tocify has built the TOC
+  let checkTOC = setInterval(function() {
+
+    // Ensures headers exist
+    if (document.querySelectorAll(".tocify-header").length > 0) {
+      clearInterval(checkTOC);
+
+      // Step 1: hide all H2 sections
+      document.querySelectorAll(".tocify-subheader").forEach(function(ul){
+        ul.style.display = "none";
+      });
+
+      // Step 2: Add click behavior to all H1 list items
+      document.querySelectorAll(".tocify-item").forEach(function(header) {
+        
+        // clickable
+        header.style.cursor = "pointer";
+
+        header.addEventListener("click", function() {
+          // find the ul.tocify-subheader immediately following this header
+          let sub = header.nextElementSibling;
+
+          if (sub && sub.classList.contains("tocify-subheader")) {
+            // toggle show/hide
+            if (sub.style.display === "none") {
+              sub.style.display = "block";
+            } else {
+              sub.style.display = "none";
+            }
+          }
+        });
+      });
+
+    }
+  }, 200);
+});
+</script>
+
+
+
+<div class="subpage-body">
+
+# Data Source and Collection
+<div class="section-divider"></div>
+
+The primary dataset used in this project is the official trip-level data provided by Citi Bike NYC, publicly available through their **System Data Portal** (https://citibikenyc.com/system-data).
+
+We downloaded all monthly trip files for the 2023 calendar year (January–December).  
+These files were ingested and combined programmatically using R.
+
+# Raw Data Variables
+<div class="section-divider"></div>
+
+Each row in the raw dataset represents a single bike trip.  
+The most important variables include:
+
+- `ride_id`: Unique trip identifier  
+- `rideable_type`: Bike type (`classic_bike` or `electric_bike`)  
+- `started_at`, `ended_at`: Start & end timestamps  
+- `start_station_name`, `end_station_name`: Station names  
+- `start_station_id`, `end_station_id`: Station IDs  
+- `start_lat`, `start_lng`, `end_lat`, `end_lng`: Coordinates  
+- `member_casual`: Membership status (`member` or `casual`)  
+
+# Data Cleaning and Processing
+
+We performed a multi-step cleaning and transformation process using **R** and the **tidyverse** suite.
+
+<div class="section-divider"></div>
+
+### Remove incomplete or invalid rows
+- Dropped entries with missing station names, invalid timestamps, or duplicated IDs  
+- Filtered out negative or zero-duration trips
+
+
+### Create new temporal variables
+To support temporal analysis, several new variables were generated:
+
+- `duration_min`: Trip duration in minutes  
+- `month_lab`: Month label (e.g., "Jan", "Feb")  
+- `hour`: Starting hour of trip  
+- `is_weekend`: Boolean indicator for Saturday/Sunday  
+
+
+### Normalize station information
+- Unified inconsistent station names  
+- Ensured ID–name mapping correctness  
+- Standardized coordinate formatting  
+
+
+### Construct the final cleaned dataset
+The cleaned dataset includes all original variables plus engineered features for flexible temporal, spatial, and user-type analyses.
+
+# Resulting Cleaned Dataset
+<div class="section-divider"></div>
+
+The finalized dataset served as the foundation for all subsequent spatial, temporal, and behavioral analyses.
+
+It contains:
+
+- ~35 million trip records  
+- All key station and membership fields  
+- Newly created variables supporting hourly, weekday/weekend, and seasonal insights  
+
+This structured format enables aggregation and visualization across multiple dimensions, which are presented in detail on the **Analysis** pages.
+
+</div>

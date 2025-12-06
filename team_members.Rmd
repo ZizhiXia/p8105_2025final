@@ -1,0 +1,44 @@
+---
+title: "Team Members"
+output:
+  html_document:
+    theme: cosmo
+    toc: false
+    css: styles.css
+---
+
+<div class="subpage-body">
+
+# Our Team
+<div class="section-divider"></div>
+
+We are a five-member team collaborating on the CitiBike analysis project.  
+Each member contributed to different aspects of data processing, spatial/temporal analysis,  
+website development, and report writing.
+
+---
+
+## Members
+<div class="section-divider"></div>
+
+### **Jingfeng Cao (jc6693)**
+- Focus: Temporal pattern analysis  
+- Contributions: Hour-of-day + month-level visualizations, summary tables   
+
+### **Renxuan Deng (rd3228)**
+- Focus: Final report writing & narrative integration
+- Contributions: Wrote and structured large portions of the Final Report, ensuring clarity, coherence, and alignment with analysis results. 
+
+### **Zizhi Xia (zx2528)**  
+- Focus: Website design & integration  
+- Contributions: Built complete project website, integrated analysis pages, layout & styling  
+
+### **Fei Xue (fx2206)**
+- Focus: User type behavior analysis  
+- Contributions: Membership trends, rideable type mix, station-level hotspot tables  
+
+### **Xirui Yang (xy2672)**
+- Focus: Spatial patterns & mapping  
+- Contributions: Leaflet maps for start/end stations, top 20 busiest stations  
+
+</div>

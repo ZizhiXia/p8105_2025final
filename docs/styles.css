@@ -1,0 +1,603 @@
+/* ================================
+   GLOBAL THEME – CitiBike Film UI
+   ================================ */
+
+body {
+  background: #e5e5e5;
+  font-family: 'Share Tech Mono', monospace !important;
+  color: #0a0a0a;
+}
+
+/* ================================
+   NAVIGATION BAR 
+   ================================ */
+
+.navbar {
+  background: #f2f2f2 !important;
+  border-bottom: 2px solid #265BFF !important;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  background-color: transparent !important;
+  color: #265BFF !important;
+  font-weight: 600;
+}
+
+.navbar-nav > li > a {
+  color: #0a0a0a !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 17px;
+  transition: color 0.25s ease;
+  background: transparent !important;
+}
+
+.navbar-nav > li > a:hover {
+  color: #265BFF !important;
+  text-shadow: 0 0 2px #265BFF;
+  background: transparent !important;
+}
+
+/* 下拉菜单 */
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background-color: transparent !important;
+  color: #265BFF !important;
+}
+
+.dropdown-menu {
+  background: #f2f2f2 !important;
+  border: 1px solid #265BFF !important;
+}
+
+.dropdown-menu > li > a {
+  color: #0a0a0a !important;
+  background: transparent !important;
+}
+
+.dropdown-menu > li > a:hover {
+  color: #265BFF !important;
+  background: rgba(38, 91, 255, 0.1) !important;
+}
+
+.nav-logo {
+  height: 28px;
+  width: auto;
+  position: static !important;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* 让 logo + 标题平齐的关键代码 */
+.navbar-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px;                 /* 比 8px 更紧致、更 balance */
+  padding-left: 4px !important;  
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+  color: #000 !important;
+}
+
+
+/* ================================
+   HEADERS & DIVIDERS
+   ================================ */
+
+h1, h2, h3, h4 {
+  font-family: 'Share Tech Mono', monospace !important;
+  letter-spacing: 1px;
+  color: #0a0a0a;
+  margin-top: 30px;
+}
+
+.section-divider {
+  height: 1.5px;
+  background: #265BFF;
+  margin: 40px 0;
+}
+
+/* ================================
+   PARAGRAPH TEXT
+   ================================ */
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+/* ================================
+   BUTTONS
+   ================================ */
+
+.btn-primary {
+  background: #265BFF !important;
+  border: none !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 16px;
+  padding: 12px 30px;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #0038ff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(38, 91, 255, 0.4);
+}
+
+/* ================================
+   HUD FRAME 
+   ================================ */
+
+.hud-frame {
+  border: 2px solid #265BFF;
+  border-radius: 6px;
+  padding: 16px;
+  background: #e5e5e5;
+  position: relative;
+  box-shadow: 0 0 0 3px rgba(38,91,255,0.15);
+}
+
+.hud-frame::before,
+.hud-frame::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #265BFF;
+}
+
+.hud-frame::before {
+  top: -6px;
+  left: -6px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.hud-frame::after {
+  bottom: -6px;
+  right: -6px;
+  border-left: none;
+  border-top: none;
+}
+
+/* ================================
+   PHOTO FRAME 
+   ================================ */
+
+.photo-frame {
+  position: relative;
+  display: inline-block;
+  padding: 12px;
+  border: 2px solid #265BFF;
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(38,91,255,0.2);
+}
+
+.photo-frame::before,
+.photo-frame::after,
+.photo-frame .corner-bl,
+.photo-frame .corner-tr {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #265BFF;
+}
+
+.photo-frame::before {
+  top: -6px;
+  left: -6px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.photo-frame::after {
+  bottom: -6px;
+  right: -6px;
+  border-left: none;
+  border-top: none;
+}
+
+.photo-frame .corner-bl {
+  bottom: -6px;
+  left: -6px;
+  border-right: none;
+  border-top: none;
+}
+
+.photo-frame .corner-tr {
+  top: -6px;
+  right: -6px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+}
+
+/* ================================
+   HERO SECTION - 图片和文字等高
+   ================================ */
+
+.hero-container {
+  display: flex;
+  align-items: stretch;  /* 改成 stretch 让两边等高 */
+  justify-content: space-between;
+  max-width: 1400px;
+  width: 100%;
+  gap: 40px;  /* 减小间距 */
+}
+
+/* 左边文字区域 */
+.hero-text-side {
+  flex: 1;
+  text-align: left;
+  padding: 40px;
+  background: #e5e5e5;  /* 让它融入背景 */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* 右边图片区域 */
+.hero-image-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;  /* 让图片填满 */
+}
+
+.hero-image-side .photo-frame {
+  width: 100%;
+  padding: 0;  /* 去掉内边距，消除白边 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image-side .photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* 填满容器 */
+  border-radius: 4px;
+}
+
+/* TRACKING ACTIVE 标签 */
+.tracking-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #265BFF;
+  margin-bottom: 20px;
+  border: 1px solid #265BFF;
+  display: inline-block;
+  padding: 5px 15px;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* 标题 */
+.hero-title {
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 5rem;
+  font-weight: 700;
+  color: #0a0a0a;
+  margin: 20px 0;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+/* 副标题 */
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: #265BFF;
+  margin: 20px 0;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+
+/* 按钮 */
+.hero-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
+  font-size: 14px;
+  padding: 12px 25px;
+  letter-spacing: 1px;
+}
+
+/* ================================
+   CARDS GRID 
+   ================================ */
+
+.cards-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin: 40px 0;
+}
+
+.cards-grid-4 .card {
+  text-align: center;
+  padding: 30px 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cards-grid-4 .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(38, 91, 255, 0.4);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.cards-grid-4 h3 {
+  font-size: 1.2rem;
+  margin: 15px 0;
+  color: #265BFF;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.cards-grid-4 p {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+/* ================================
+   MAP SECTION
+   ================================ */
+
+.map-section {
+  margin: 40px 0;
+}
+
+.map-container {
+  padding: 10px;
+  margin: 20px 0;
+}
+
+.info-alert {
+  background: #f8f9fa;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.info-alert ul {
+  margin-bottom: 0;
+}
+
+/* ================================
+   EXPLORE GRID 
+   ================================ */
+
+.explore-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin: 40px 0;
+}
+
+.explore-card {
+  text-align: center;
+  padding: 40px 20px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.explore-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 25px rgba(38, 91, 255, 0.5);
+  text-decoration: none;
+  color: inherit;
+}
+
+.explore-card i {
+  color: #265BFF;
+  margin-bottom: 20px;
+}
+
+.explore-card h3 {
+  font-size: 1.3rem;
+  margin: 15px 0;
+  color: #265BFF;
+  font-weight: 600;
+}
+
+.explore-card p {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 600;
+}
+
+/* ================================
+   VIDEO CONTAINER
+   ================================ */
+
+.video-container {
+  padding: 20px;
+  margin: 40px auto;
+  max-width: 900px;
+}
+
+.video-container iframe {
+  border-radius: 4px;
+}
+
+/* ================================
+   RESPONSIVE 
+   ================================ */
+
+@media (max-width: 1200px) {
+  .cards-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .hero-text-side {
+    text-align: center;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .hero-buttons {
+    justify-content: center;
+  }
+  
+  .hero-image-side .photo-frame img {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-wrapper {
+    padding: 40px 20px;
+    min-height: auto;
+  }
+  
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+  }
+  
+  .cards-grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .explore-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slideshow .slide {
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  border-radius: 4px;
+}
+
+.slideshow .slide.active {
+  opacity: 1;
+}
+
+/* ============================
+   SUBPAGE LAYOUT OPTIMIZATION
+   ============================ */
+
+/* 正文字体：更适合阅读 */
+.subpage-body p, 
+.subpage-body li {
+  font-family: "Roboto", sans-serif !important;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* 标题样式：保留你的等宽字体 */
+.subpage-body h1, 
+.subpage-body h2, 
+.subpage-body h3 {
+  font-family: 'Share Tech Mono', monospace !important;
+  letter-spacing: 1px;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  color: #0a0a0a;
+}
+
+/* 左侧目录优化 */
+.tocify {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.08);
+  margin-top: 30px;
+}
+
+.tocify ul li {
+  padding: 6px 0;
+  font-size: 15px;
+}
+
+.tocify .active {
+  background: #265BFF !important;
+  color: white !important;
+  border-radius: 4px;
+}
+
+/* section 分隔线 */
+.section-divider {
+  height: 2px;
+  background: #265BFF;
+  margin: 40px 0;
+  opacity: 0.4;
+}
+
+/* Make TOC subtitles lighter and italic */
+.tocify .tocify-subheader {
+  color: #777 !important;         /* 浅灰色 */
+  font-style: italic !important;  /* 斜体 */
+  font-size: 14px !important;     /* 稍微更精致 */
+}
+

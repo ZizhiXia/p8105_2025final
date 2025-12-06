@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Home</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/logo_bike.png">
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img src='images/logo_bike.png' class='nav-logo' /> </a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="proposal.html">
+    <span class="fa fa-book"></span>
+     
+    Proposal
+  </a>
+</li>
+<li>
+  <a href="data.html">
+    <span class="fa fa-cogs"></span>
+     
+    Data
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-chart-bar"></span>
+     
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="analysis_spatial.html">Spatial Patterns</a>
+    </li>
+    <li>
+      <a href="analysis_temporal.html">Temporal Patterns</a>
+    </li>
+    <li>
+      <a href="analysis_users.html">User Patterns</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="report.html">
+    <span class="fa fa-file-text"></span>
+     
+    Report
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-users"></span>
+     
+    Team
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="team_members.html">Team Members</a>
+    </li>
+    <li>
+      <a href="mailto:zx2528@cumc.columbia.edu">Contact Us</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/ZizhiXia/p8105_2025final">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="#">
+    <span class="fa fa-youtube fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Home</h1>
+
+</div>
+
+
+<style>
+h1.title {
+  display: none;
+}
+</style>
+
+<div class="hero-wrapper">
+  <div class="hero-container">
+    
+    <div class="hero-text-side">
+      <div class="tracking-label">MULTIMODAL TRACKING ACTIVE</div>
+      <h1 class="hero-title">EXPLORING CITIBIKE USAGE IN NYC</h1>
+      <p class="hero-subtitle">USE 2023 FULL YEAR DATA</p>
+    
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href="analysis_temporal.html">VIEW ANALYSIS</a>
+        <a class="btn btn-primary" href="report.html">FULL REPORT</a>
+      </div>
+    </div>
+    
+    
+    <div class="hero-image-side">
+  <div class="photo-frame slideshow">
+
+    <img src="images/hero1.jpg" class="slide active">
+    <img src="images/hero2.jpg" class="slide">
+    <img src="images/hero3.jpg" class="slide">
+    <img src="images/hero4.jpg" class="slide">
+
+    <div class="corner-bl"></div>
+    <div class="corner-tr"></div>
+  </div>
+</div>
+
+    
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<div class="container-fluid">
+<div id="mission-objectives" class="section level2">
+<h2>MISSION OBJECTIVES</h2>
+
+<div class="cards-grid-4">
+
+  <div class="card hud-frame">
+    <div class="card-icon">📍</div>
+    <h3>SPATIAL PATTERNS</h3>
+    <p>Manhattan dominates with 70%+ rides. Top stations: Central Park, Midtown, Hudson River.</p>
+  </div>
+
+  <div class="card hud-frame">
+    <div class="card-icon">⏰</div>
+    <h3>TEMPORAL DYNAMICS</h3>
+    <p>Summer peak in July-August. Weekday commute spikes at 8 AM and 6 PM.</p>
+  </div>
+
+  <div class="card hud-frame">
+    <div class="card-icon">👥</div>
+    <h3>USER BEHAVIOR</h3>
+    <p>Members are commuters. Casual users are weekend leisure riders.</p>
+  </div>
+
+  <div class="card hud-frame">
+    <div class="card-icon">🚴</div>
+    <h3>RIDE PATTERNS</h3>
+    <p>Loop trips dominate Central Park. Average duration is 12-17 minutes.</p>
+  </div>
+
+</div>
+
+<div class="section-divider"></div>
+</div>
+<div id="interactive-station-maps" class="section level2">
+<h2>INTERACTIVE STATION MAPS</h2>
+<div id="start-stations---origin-tracking" class="section level3">
+<h3>START STATIONS - ORIGIN TRACKING</h3>
+
+<div class="hud-frame map-container">
+  <iframe src="map_start.html" width="100%" height="600px" frameborder="0"></iframe>
+</div>
+
+<p><br></p>
+</div>
+<div id="end-stations---destination-tracking" class="section level3">
+<h3>END STATIONS - DESTINATION TRACKING</h3>
+
+<div class="hud-frame map-container">
+  <iframe src="map_end.html" width="100%" height="600px" frameborder="0"></iframe>
+</div>
+
+
+<div class="info-alert hud-frame" style="margin-top: 20px;">
+  <p><strong>💡 MAP INSIGHTS:</strong></p>
+  <ul style="text-align:left; margin-left:20px;">
+    <li>Hover markers for station names and ride counts</li>
+    <li>Zoom to explore neighborhood patterns</li>
+    <li>Notice the Manhattan concentration</li>
+  </ul>
+</div>
+
+<div class="section-divider"></div>
+</div>
+</div>
+<div id="explore-deeper" class="section level2">
+<h2>EXPLORE DEEPER</h2>
+
+<div class="explore-grid-3">
+
+  <a href="analysis_spatial.html" class="explore-card hud-frame">
+    <i class="fa fa-map-marker fa-2x"></i>
+    <h3>SPATIAL ANALYSIS</h3>
+    <p>Station hotspots and geographic distribution</p>
+  </a>
+  
+  <a href="analysis_temporal.html" class="explore-card hud-frame">
+    <i class="fa fa-clock-o fa-2x"></i>
+    <h3>TEMPORAL PATTERNS</h3>
+    <p>Hourly, daily and seasonal trends</p>
+  </a>
+  
+  <a href="data.html" class="explore-card hud-frame">
+    <i class="fa fa-database fa-2x"></i>
+    <h3>DATA PROCESSING</h3>
+    <p>Cleaning and transformation pipeline</p>
+  </a>
+
+</div>
+
+<div class="section-divider"></div>
+</div>
+<div id="project-screencast" class="section level2">
+<h2>PROJECT SCREENCAST</h2>
+
+<div class="video-container hud-frame">
+  <iframe width="100%" height="500" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+  <p style="text-align:center; margin-top:10px; color:#666;"></p>
+</div>
+
+</div>
+</div>
+<p><br><br></p>
+
+<div class="footer" style="text-align:center; padding:30px; border-top:2px solid #265BFF; margin-top:60px;">
+  <p style="font-size:14px; color:#666;">P8105 DATA SCIENCE FINAL PROJECT @ 2025</p>
+  <p>
+    <a href="https://github.com/ZizhiXia/p8105_2025final" style="color:#265BFF;">
+      <i class="fa fa-github"></i> GITHUB
+    </a>
+  </p>
+</div>
+
+<script>
+let slides = document.querySelectorAll('.slideshow .slide');
+let index = 0;
+
+setInterval(() => {
+  slides[index].classList.remove('active');
+  index = (index + 1) % slides.length;
+  slides[index].classList.add('active');
+}, 2500);  
+</script>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

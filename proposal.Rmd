@@ -1,0 +1,94 @@
+---
+title: "Project Proposal"
+output:
+  html_document:
+    theme: cosmo
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    css: styles.css
+---
+
+<div class="subpage-body">
+
+# Group Members
+<div class="section-divider"></div>
+
+- Jingfeng Cao (jc6693)  
+- Renxuan Deng (rd3228)  
+- Zizhi Xia (zx2528)  
+- Fei Xue (fx2206)  
+- Xirui Yang (xy2672)
+
+# Tentative Project Title
+<div class="section-divider"></div>
+
+**Exploring the Usage Pattern of CitiBike in NYC**
+
+# Motivation
+<div class="section-divider"></div>
+
+By analyzing trip-level data from CitiBike NYC, this project aims to understand  
+ridership patterns, including factors influencing:
+
+- ride frequency  
+- distance  
+- duration  
+- start and end station selection  
+
+Insights may help:
+
+- improve bike availability during peak hours  
+- optimize station placement  
+- enhance overall user experience  
+
+# Intended Final Products
+<div class="section-divider"></div>
+
+- An interactive website summarizing key CitiBike usage trends  
+- Visualization of ride frequency patterns  
+- Seasonal and demographic breakdowns  
+- Heat maps showing popular start and end stations  
+
+# Anticipated Data Sources
+<div class="section-divider"></div>
+
+Primary dataset:
+
+- CitiBike NYC official trip-level data (CSV)  
+  https://citibikenyc.com/system-data  
+
+Additional metadata:
+
+- Station information  
+- NYC borough shapefiles (optional)
+
+# Planned Analyses / Visualizations
+<div class="section-divider"></div>
+
+- Ride frequency by time of day, season, membership type, gender  
+- Spatial distributions of start & end stations  
+- Hotspot analysis  
+- Potential clustering of ride routes  
+
+# Coding Challenges Anticipated
+<div class="section-divider"></div>
+
+- Handling large CSV files (multi-million rows)  
+- Combining datasets across months  
+- Spatial mapping & coordinate alignment  
+- Maintaining site performance with large visual outputs  
+
+# Planned Timeline
+<div class="section-divider"></div>
+
+| Week | Tasks |
+|------|-------|
+| Week 1 | Choose and clean the CitiBike datasets |
+| Week 2 | Basic analysis + visualize key trends |
+| Week 3 | Build website and check visualizations |
+| Week 4 | Write final report + polish website |
+
+</div>

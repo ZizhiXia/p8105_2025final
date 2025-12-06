@@ -1,0 +1,254 @@
+---
+title: "Final Report"
+output:
+  html_document:
+    theme: cosmo
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    css: styles.css
+---
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Wait until tocify has built the TOC
+  let checkTOC = setInterval(function() {
+
+    // Ensures headers exist
+    if (document.querySelectorAll(".tocify-header").length > 0) {
+      clearInterval(checkTOC);
+
+      // Step 1: hide all H2 sections
+      document.querySelectorAll(".tocify-subheader").forEach(function(ul){
+        ul.style.display = "none";
+      });
+
+      // Step 2: Add click behavior to all H1 list items
+      document.querySelectorAll(".tocify-item").forEach(function(header) {
+        
+        // clickable
+        header.style.cursor = "pointer";
+
+        header.addEventListener("click", function() {
+          // find the ul.tocify-subheader immediately following this header
+          let sub = header.nextElementSibling;
+
+          if (sub && sub.classList.contains("tocify-subheader")) {
+            // toggle show/hide
+            if (sub.style.display === "none") {
+              sub.style.display = "block";
+            } else {
+              sub.style.display = "none";
+            }
+          }
+        });
+      });
+
+    }
+  }, 200);
+});
+</script>
+
+
+<div class="subpage-body">
+
+# Motivation
+<div class="section-divider"></div>
+
+CitiBike is a key component of New York City’s public transportation network, providing an affordable and
+flexible mobility option for residents and visitors. Understanding how and when the system is used can reveal
+valuable insights into urban mobility patterns, commuter behavior, and the impact of external factors such as
+weather, time of day, and user demographics. This project aims to analyze trip-level data from CitiBike NYC to
+identify factors that influence ride frequency, distance, and station usage. The findings could inform
+operational decisions—such as bike rebalancing and station placement—to improve service availability and
+enhance the overall user experience.
+
+# Related Work
+<div class="section-divider"></div>
+
+This project is methodologically and thematically grounded in the comprehensive analysis presented by Todd
+W. Schneider in his article, “A Tale of Twenty-Two Million Citi Bikes: Analyzing the NYC Bike Share System.”
+Schneider’s work stands as a foundational public analysis of the CitiBike system, processing and visualizing
+the system’s first two years of operation, encompassing 22 million individual trips. His approach provides a
+direct blueprint for our study. We draw particular inspiration from his rigorous data engineering process, which
+involved reconstructing station location histories to ensure accurate spatial mapping—a consideration critical
+for any longitudinal study of urban infrastructure. Furthermore, his exploratory analysis established key
+patterns that our project seeks to revisit and extend with more recent data; these include the identification of
+the most popular stations and routes, the stark difference in usage patterns between weekdays (dominated by
+short, commute-like trips) and weekends (characterized by longer, leisure-oriented rides), and the spatial
+clustering of trips within Manhattan’s core. By applying a similar analytical lens to data from 2023, our work
+inherently tests the persistence of these patterns over time and serves as a comparative update to his seminal
+findings. Schneider’s use of tools like R, PostGIS, and Leaflet for large-scale data processing and interactive
+visualization also informs our own technical strategy, reinforcing the value of open-source tools in civic data
+analysis. Thus, his article not only provides a substantive prior benchmark against which we can compare our
+results but also outlines a proven analytical framework for investigating the spatial-temporal dynamics of
+large-scale bike-share systems.
+
+# Initial Questions
+<div class="section-divider"></div>
+
+Our initial questions include:
+
+• How does ride frequency vary by time of day, day of the week, and season?  
+• What are the most popular start and end stations, and how do they differ by time or user type?  
+• How do factors such as user gender, age group, and membership type affect ride distance and duration?  
+• Are there identifiable commuter routes or leisure-oriented usage patterns?
+
+# Data
+<div class="section-divider"></div>
+
+## Data Source and Collection
+The primary dataset used in this analysis is the official trip-level data provided by Citi Bike NYC, publicly
+available through their System Data portal. We downloaded all monthly trip files for the calendar year 2023
+(January through December). These files were ingested and combined programmatically.
+
+## Raw Data Variables
+
+Each row in the raw dataset represents a single bike trip, with the following key columns  
+(a subset of all available fields is listed here for relevance):
+
+- `ride_id`: A unique identifier for each trip  
+- `rideable_type`: The type of bike used (`classic_bike` or `electric_bike`)  
+- `started_at`, `ended_at`: The start and end timestamps of the trip  
+- `start_station_name`, `end_station_name`: Station names  
+- `start_station_id`, `end_station_id`: Station identifiers  
+- `start_lat`, `start_lng`, `end_lat`, `end_lng`: Coordinates  
+- `member_casual`: Membership status
+
+## Data Cleaning and Processing
+We performed a multi-step cleaning and transformation process to prepare the
+data for analysis using R and the tidyverse suite of packages.
+
+## Resulting Cleaned Dataset
+The final cleaned dataset served as the foundation for all subsequent analysis. Key analytical variables
+included the original station and member information, alongside the newly created temporal features
+(duration_min, month_lab, hour, is_weekend). This structured format allowed for flexible aggregation and
+visualization by time, space, and user type.
+
+# Exploratory Analysis
+<div class="section-divider"></div>
+
+## Spatial Patterns: Station Popularity
+Our analysis revealed a high concentration of activity in Manhattan’s core areas.  
+Top findings include:
+
+- W 21 St & 6 Ave as the most popular start station (~140,000 rides)  
+- Overlap between top start and end station lists  
+- Strong clustering around Midtown, Central Park, and Hudson River Greenway  
+
+Interpretation:  
+This spatial convergence suggests these stations function as both major origins and destinations, indicating
+balanced usage. It also raises equity considerations due to low-density ridership in outer boroughs.
+
+## Temporal Patterns: Monthly and Seasonal Trends
+Monthly ride counts showed:
+
+- Members dominate overall usage year-round  
+- Casual riders show strong summer spikes (July–August)  
+- Winter usage drops sharply for casual riders  
+
+Interpretation:  
+Members’ stability reflects commuting routines; casual riders show weather sensitivity.
+
+## User Behavioral Patterns: Weekday vs Weekend
+Key findings:
+
+- Members show sharp commuting peaks at 8 AM and 6 PM on weekdays  
+- Casual riders show smoother afternoon peaks  
+- Both groups display flatter curves on weekends  
+
+Interpretation:  
+Confirms dual-purpose system: weekday commuting vs weekend leisure.
+
+## Ride Duration Analysis
+Ride duration is right-skewed. Findings include:
+
+- Longer average durations in warm months (peak 16.8 min in May)  
+- Shortest durations in December (12.9 min)  
+- Longest durations between 12–4 AM (often >18 min)  
+
+Interpretation:  
+Nighttime rides may serve niche purposes—recreation, nightlife transport, or service industry commutes.
+
+## Route and Trip Purpose Analysis
+Frequent origin-destination pairs show:
+
+- Central Park loops dominate (most common: Central Park S & 6 Ave → same station)  
+- Roosevelt Island Tramway loops also strong  
+- Short-distance commuting pairs in Financial District  
+
+Interpretation:  
+Recreational loops and commuting corridors coexist within the system.
+
+## Vehicle Type Preference
+Both member and casual riders used classic and electric bikes in roughly equal proportion (~50/50).
+
+Interpretation:  
+Bike type does not differentiate user behavior significantly.
+
+## Additional Analysis
+
+### Interactive Spatial Visualization
+Two Leaflet maps were created:
+
+Methodology:
+
+- Circle markers scaled by ride count  
+- Viridis color gradients  
+- Hover labels + click popups  
+
+Findings:  
+The maps confirmed:
+
+- Extremely dense Manhattan clusters  
+- Symmetry between start and end station patterns  
+- Very sparse distribution in outer boroughs except for a few hotspots  
+
+### Comprehensive Station Ranking Analysis
+Methodology:
+
+- Faceted bar chart comparing start, end, and total rides  
+- Direct labels for ride counts  
+
+Findings:
+
+- Rankings consistent across all three metrics  
+- Top stations exceed 100,000 annual rides  
+- Roughly 10–15 stations dominate overall activity  
+
+# Discussion
+<div class="section-divider"></div>
+
+## Summary of Key Findings
+Our analysis reveals:
+
+- Strong spatial concentration in Manhattan  
+- Clear temporal rhythms (seasonal + weekday/weekend + daily commute peaks)  
+- Distinct behavior between members and casual riders  
+- Mixture of trip purposes: commuting, recreation, nighttime niche use  
+
+## Alignment with Initial Questions and Expectations
+Findings matched expectations, but also introduced new insights:
+
+- Nighttime long-duration pattern stronger than anticipated  
+- Bike-type neutrality was surprising  
+- Updated quantitative station rankings add detail beyond prior work  
+
+# Conclusion
+<div class="section-divider"></div>
+
+This comprehensive analysis highlights CitiBike’s dual purpose as both a transportation utility and recreational
+amenity. It emphasizes spatial and temporal dynamics essential for system planning. The findings offer
+actionable insights for improving service efficiency and enhancing user experience, while also extending prior
+research with updated 2023 data.
+
+# References
+<div class="section-divider"></div>
+
+- https://toddwschneider.com/posts/a-tale-of-twenty-two-million-citi-bikes-analyzing-the-nyc-bike-share-system/  
+- https://citibikenyc.com/system-data  
+
+</div>

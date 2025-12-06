@@ -1,0 +1,50 @@
+name: "CitiBike Usage in NYC"
+output_dir: "docs"
+
+navbar:
+  title: "<img src='images/logo_bike.png' class='nav-logo' /> "
+  left:
+    - text: "Home"
+      icon: fa-home
+      href: "index.html"
+    - text: "Proposal"
+      icon: fa-book
+      href: "proposal.html"
+    - text: "Data"
+      icon: fa-cogs
+      href: "data.html" 
+    - text: "Analysis"
+      icon: fa-chart-bar
+      menu:
+        - text: "Spatial Patterns"
+          href: "analysis_spatial.html"
+        - text: "Temporal Patterns"
+          href: "analysis_temporal.html"
+        - text: "User Patterns"
+          href: "analysis_users.html"
+    - text: "Report"
+      icon: fa-file-text
+      href: "report.html"
+    - text: "Team"
+      icon: fa-users
+      menu:
+        - text: "Team Members"
+          href: "team_members.html"
+        - text: "Contact Us"
+          href: "mailto:zx2528@cumc.columbia.edu"
+
+  right:
+    - icon: fa-github fa-lg
+      href: "https://github.com/ZizhiXia/p8105_2025final"
+    - icon: fa-youtube fa-lg
+      href: "#"
+
+output:
+  html_document:
+    theme: cosmo
+    toc: false
+    includes:
+      in_header:
+        - "favicon.html"
+        - "fonts.html"
+    css: "styles.css"

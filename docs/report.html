@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Final Report</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel="icon" type="image/png" href="images/logo_bike.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img src='images/logo_bike.png' class='nav-logo' /> </a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="proposal.html">
+    <span class="fa fa-book"></span>
+     
+    Proposal
+  </a>
+</li>
+<li>
+  <a href="data.html">
+    <span class="fa fa-cogs"></span>
+     
+    Data
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-chart-bar"></span>
+     
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="analysis_spatial.html">Spatial Patterns</a>
+    </li>
+    <li>
+      <a href="analysis_temporal.html">Temporal Patterns</a>
+    </li>
+    <li>
+      <a href="analysis_users.html">User Patterns</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="report.html">
+    <span class="fa fa-file-text"></span>
+     
+    Report
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-users"></span>
+     
+    Team
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="team_members.html">Team Members</a>
+    </li>
+    <li>
+      <a href="mailto:zx2528@cumc.columbia.edu">Contact Us</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/ZizhiXia/p8105_2025final">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="#">
+    <span class="fa fa-youtube fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Final Report</h1>
+
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Wait until tocify has built the TOC
+  let checkTOC = setInterval(function() {
+
+    // Ensures headers exist
+    if (document.querySelectorAll(".tocify-header").length > 0) {
+      clearInterval(checkTOC);
+
+      // Step 1: hide all H2 sections
+      document.querySelectorAll(".tocify-subheader").forEach(function(ul){
+        ul.style.display = "none";
+      });
+
+      // Step 2: Add click behavior to all H1 list items
+      document.querySelectorAll(".tocify-item").forEach(function(header) {
+        
+        // clickable
+        header.style.cursor = "pointer";
+
+        header.addEventListener("click", function() {
+          // find the ul.tocify-subheader immediately following this header
+          let sub = header.nextElementSibling;
+
+          if (sub && sub.classList.contains("tocify-subheader")) {
+            // toggle show/hide
+            if (sub.style.display === "none") {
+              sub.style.display = "block";
+            } else {
+              sub.style.display = "none";
+            }
+          }
+        });
+      });
+
+    }
+  }, 200);
+});
+</script>
+<div class="subpage-body">
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<div class="section-divider">
+
+</div>
+<p>CitiBike is a key component of New York City’s public transportation
+network, providing an affordable and flexible mobility option for
+residents and visitors. Understanding how and when the system is used
+can reveal valuable insights into urban mobility patterns, commuter
+behavior, and the impact of external factors such as weather, time of
+day, and user demographics. This project aims to analyze trip-level data
+from CitiBike NYC to identify factors that influence ride frequency,
+distance, and station usage. The findings could inform operational
+decisions—such as bike rebalancing and station placement—to improve
+service availability and enhance the overall user experience.</p>
+</div>
+<div id="related-work" class="section level1">
+<h1>Related Work</h1>
+<div class="section-divider">
+
+</div>
+<p>This project is methodologically and thematically grounded in the
+comprehensive analysis presented by Todd W. Schneider in his article, “A
+Tale of Twenty-Two Million Citi Bikes: Analyzing the NYC Bike Share
+System.” Schneider’s work stands as a foundational public analysis of
+the CitiBike system, processing and visualizing the system’s first two
+years of operation, encompassing 22 million individual trips. His
+approach provides a direct blueprint for our study. We draw particular
+inspiration from his rigorous data engineering process, which involved
+reconstructing station location histories to ensure accurate spatial
+mapping—a consideration critical for any longitudinal study of urban
+infrastructure. Furthermore, his exploratory analysis established key
+patterns that our project seeks to revisit and extend with more recent
+data; these include the identification of the most popular stations and
+routes, the stark difference in usage patterns between weekdays
+(dominated by short, commute-like trips) and weekends (characterized by
+longer, leisure-oriented rides), and the spatial clustering of trips
+within Manhattan’s core. By applying a similar analytical lens to data
+from 2023, our work inherently tests the persistence of these patterns
+over time and serves as a comparative update to his seminal findings.
+Schneider’s use of tools like R, PostGIS, and Leaflet for large-scale
+data processing and interactive visualization also informs our own
+technical strategy, reinforcing the value of open-source tools in civic
+data analysis. Thus, his article not only provides a substantive prior
+benchmark against which we can compare our results but also outlines a
+proven analytical framework for investigating the spatial-temporal
+dynamics of large-scale bike-share systems.</p>
+</div>
+<div id="initial-questions" class="section level1">
+<h1>Initial Questions</h1>
+<div class="section-divider">
+
+</div>
+<p>Our initial questions include:</p>
+<p>• How does ride frequency vary by time of day, day of the week, and
+season?<br />
+• What are the most popular start and end stations, and how do they
+differ by time or user type?<br />
+• How do factors such as user gender, age group, and membership type
+affect ride distance and duration?<br />
+• Are there identifiable commuter routes or leisure-oriented usage
+patterns?</p>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<div class="section-divider">
+
+</div>
+<div id="data-source-and-collection" class="section level2">
+<h2>Data Source and Collection</h2>
+<p>The primary dataset used in this analysis is the official trip-level
+data provided by Citi Bike NYC, publicly available through their System
+Data portal. We downloaded all monthly trip files for the calendar year
+2023 (January through December). These files were ingested and combined
+programmatically.</p>
+</div>
+<div id="raw-data-variables" class="section level2">
+<h2>Raw Data Variables</h2>
+<p>Each row in the raw dataset represents a single bike trip, with the
+following key columns<br />
+(a subset of all available fields is listed here for relevance):</p>
+<ul>
+<li><code>ride_id</code>: A unique identifier for each trip<br />
+</li>
+<li><code>rideable_type</code>: The type of bike used
+(<code>classic_bike</code> or <code>electric_bike</code>)<br />
+</li>
+<li><code>started_at</code>, <code>ended_at</code>: The start and end
+timestamps of the trip<br />
+</li>
+<li><code>start_station_name</code>, <code>end_station_name</code>:
+Station names<br />
+</li>
+<li><code>start_station_id</code>, <code>end_station_id</code>: Station
+identifiers<br />
+</li>
+<li><code>start_lat</code>, <code>start_lng</code>,
+<code>end_lat</code>, <code>end_lng</code>: Coordinates<br />
+</li>
+<li><code>member_casual</code>: Membership status</li>
+</ul>
+</div>
+<div id="data-cleaning-and-processing" class="section level2">
+<h2>Data Cleaning and Processing</h2>
+<p>We performed a multi-step cleaning and transformation process to
+prepare the data for analysis using R and the tidyverse suite of
+packages.</p>
+</div>
+<div id="resulting-cleaned-dataset" class="section level2">
+<h2>Resulting Cleaned Dataset</h2>
+<p>The final cleaned dataset served as the foundation for all subsequent
+analysis. Key analytical variables included the original station and
+member information, alongside the newly created temporal features
+(duration_min, month_lab, hour, is_weekend). This structured format
+allowed for flexible aggregation and visualization by time, space, and
+user type.</p>
+</div>
+</div>
+<div id="exploratory-analysis" class="section level1">
+<h1>Exploratory Analysis</h1>
+<div class="section-divider">
+
+</div>
+<div id="spatial-patterns-station-popularity" class="section level2">
+<h2>Spatial Patterns: Station Popularity</h2>
+<p>Our analysis revealed a high concentration of activity in Manhattan’s
+core areas.<br />
+Top findings include:</p>
+<ul>
+<li>W 21 St &amp; 6 Ave as the most popular start station (~140,000
+rides)<br />
+</li>
+<li>Overlap between top start and end station lists<br />
+</li>
+<li>Strong clustering around Midtown, Central Park, and Hudson River
+Greenway</li>
+</ul>
+<p>Interpretation:<br />
+This spatial convergence suggests these stations function as both major
+origins and destinations, indicating balanced usage. It also raises
+equity considerations due to low-density ridership in outer
+boroughs.</p>
+</div>
+<div id="temporal-patterns-monthly-and-seasonal-trends"
+class="section level2">
+<h2>Temporal Patterns: Monthly and Seasonal Trends</h2>
+<p>Monthly ride counts showed:</p>
+<ul>
+<li>Members dominate overall usage year-round<br />
+</li>
+<li>Casual riders show strong summer spikes (July–August)<br />
+</li>
+<li>Winter usage drops sharply for casual riders</li>
+</ul>
+<p>Interpretation:<br />
+Members’ stability reflects commuting routines; casual riders show
+weather sensitivity.</p>
+</div>
+<div id="user-behavioral-patterns-weekday-vs-weekend"
+class="section level2">
+<h2>User Behavioral Patterns: Weekday vs Weekend</h2>
+<p>Key findings:</p>
+<ul>
+<li>Members show sharp commuting peaks at 8 AM and 6 PM on
+weekdays<br />
+</li>
+<li>Casual riders show smoother afternoon peaks<br />
+</li>
+<li>Both groups display flatter curves on weekends</li>
+</ul>
+<p>Interpretation:<br />
+Confirms dual-purpose system: weekday commuting vs weekend leisure.</p>
+</div>
+<div id="ride-duration-analysis" class="section level2">
+<h2>Ride Duration Analysis</h2>
+<p>Ride duration is right-skewed. Findings include:</p>
+<ul>
+<li>Longer average durations in warm months (peak 16.8 min in May)<br />
+</li>
+<li>Shortest durations in December (12.9 min)<br />
+</li>
+<li>Longest durations between 12–4 AM (often &gt;18 min)</li>
+</ul>
+<p>Interpretation:<br />
+Nighttime rides may serve niche purposes—recreation, nightlife
+transport, or service industry commutes.</p>
+</div>
+<div id="route-and-trip-purpose-analysis" class="section level2">
+<h2>Route and Trip Purpose Analysis</h2>
+<p>Frequent origin-destination pairs show:</p>
+<ul>
+<li>Central Park loops dominate (most common: Central Park S &amp; 6 Ave
+→ same station)<br />
+</li>
+<li>Roosevelt Island Tramway loops also strong<br />
+</li>
+<li>Short-distance commuting pairs in Financial District</li>
+</ul>
+<p>Interpretation:<br />
+Recreational loops and commuting corridors coexist within the
+system.</p>
+</div>
+<div id="vehicle-type-preference" class="section level2">
+<h2>Vehicle Type Preference</h2>
+<p>Both member and casual riders used classic and electric bikes in
+roughly equal proportion (~50/50).</p>
+<p>Interpretation:<br />
+Bike type does not differentiate user behavior significantly.</p>
+</div>
+<div id="additional-analysis" class="section level2">
+<h2>Additional Analysis</h2>
+<div id="interactive-spatial-visualization" class="section level3">
+<h3>Interactive Spatial Visualization</h3>
+<p>Two Leaflet maps were created:</p>
+<p>Methodology:</p>
+<ul>
+<li>Circle markers scaled by ride count<br />
+</li>
+<li>Viridis color gradients<br />
+</li>
+<li>Hover labels + click popups</li>
+</ul>
+<p>Findings:<br />
+The maps confirmed:</p>
+<ul>
+<li>Extremely dense Manhattan clusters<br />
+</li>
+<li>Symmetry between start and end station patterns<br />
+</li>
+<li>Very sparse distribution in outer boroughs except for a few
+hotspots</li>
+</ul>
+</div>
+<div id="comprehensive-station-ranking-analysis" class="section level3">
+<h3>Comprehensive Station Ranking Analysis</h3>
+<p>Methodology:</p>
+<ul>
+<li>Faceted bar chart comparing start, end, and total rides<br />
+</li>
+<li>Direct labels for ride counts</li>
+</ul>
+<p>Findings:</p>
+<ul>
+<li>Rankings consistent across all three metrics<br />
+</li>
+<li>Top stations exceed 100,000 annual rides<br />
+</li>
+<li>Roughly 10–15 stations dominate overall activity</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="discussion" class="section level1">
+<h1>Discussion</h1>
+<div class="section-divider">
+
+</div>
+<div id="summary-of-key-findings" class="section level2">
+<h2>Summary of Key Findings</h2>
+<p>Our analysis reveals:</p>
+<ul>
+<li>Strong spatial concentration in Manhattan<br />
+</li>
+<li>Clear temporal rhythms (seasonal + weekday/weekend + daily commute
+peaks)<br />
+</li>
+<li>Distinct behavior between members and casual riders<br />
+</li>
+<li>Mixture of trip purposes: commuting, recreation, nighttime niche
+use</li>
+</ul>
+</div>
+<div id="alignment-with-initial-questions-and-expectations"
+class="section level2">
+<h2>Alignment with Initial Questions and Expectations</h2>
+<p>Findings matched expectations, but also introduced new insights:</p>
+<ul>
+<li>Nighttime long-duration pattern stronger than anticipated<br />
+</li>
+<li>Bike-type neutrality was surprising<br />
+</li>
+<li>Updated quantitative station rankings add detail beyond prior
+work</li>
+</ul>
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<div class="section-divider">
+
+</div>
+<p>This comprehensive analysis highlights CitiBike’s dual purpose as
+both a transportation utility and recreational amenity. It emphasizes
+spatial and temporal dynamics essential for system planning. The
+findings offer actionable insights for improving service efficiency and
+enhancing user experience, while also extending prior research with
+updated 2023 data.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<div class="section-divider">
+
+</div>
+<ul>
+<li><a
+href="https://toddwschneider.com/posts/a-tale-of-twenty-two-million-citi-bikes-analyzing-the-nyc-bike-share-system/"
+class="uri">https://toddwschneider.com/posts/a-tale-of-twenty-two-million-citi-bikes-analyzing-the-nyc-bike-share-system/</a><br />
+</li>
+<li><a href="https://citibikenyc.com/system-data"
+class="uri">https://citibikenyc.com/system-data</a></li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

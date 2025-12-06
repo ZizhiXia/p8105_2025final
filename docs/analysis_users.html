@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>User Patterns</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel="icon" type="image/png" href="images/logo_bike.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img src='images/logo_bike.png' class='nav-logo' /> </a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="proposal.html">
+    <span class="fa fa-book"></span>
+     
+    Proposal
+  </a>
+</li>
+<li>
+  <a href="data.html">
+    <span class="fa fa-cogs"></span>
+     
+    Data
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-chart-bar"></span>
+     
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="analysis_spatial.html">Spatial Patterns</a>
+    </li>
+    <li>
+      <a href="analysis_temporal.html">Temporal Patterns</a>
+    </li>
+    <li>
+      <a href="analysis_users.html">User Patterns</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="report.html">
+    <span class="fa fa-file-text"></span>
+     
+    Report
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-users"></span>
+     
+    Team
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="team_members.html">Team Members</a>
+    </li>
+    <li>
+      <a href="mailto:zx2528@cumc.columbia.edu">Contact Us</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/ZizhiXia/p8105_2025final">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="#">
+    <span class="fa fa-youtube fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">User Patterns</h1>
+
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Wait until tocify has built the TOC
+  let checkTOC = setInterval(function() {
+
+    // Ensures headers exist
+    if (document.querySelectorAll(".tocify-header").length > 0) {
+      clearInterval(checkTOC);
+
+      // Step 1: hide all H2 sections
+      document.querySelectorAll(".tocify-subheader").forEach(function(ul){
+        ul.style.display = "none";
+      });
+
+      // Step 2: Add click behavior to all H1 list items
+      document.querySelectorAll(".tocify-item").forEach(function(header) {
+        
+        // clickable
+        header.style.cursor = "pointer";
+
+        header.addEventListener("click", function() {
+          // find the ul.tocify-subheader immediately following this header
+          let sub = header.nextElementSibling;
+
+          if (sub && sub.classList.contains("tocify-subheader")) {
+            // toggle show/hide
+            if (sub.style.display === "none") {
+              sub.style.display = "block";
+            } else {
+              sub.style.display = "none";
+            }
+          }
+        });
+      });
+
+    }
+  }, 200);
+});
+</script>
+<div class="subpage-body">
+<div id="users-patterns-overview" class="section level1">
+<h1>Users Patterns Overview</h1>
+<div class="section-divider">
+
+</div>
+<p>This section analyzes <strong>how different user types (member
+vs. casual)</strong> behave when using CitiBike.<br />
+We investigate data ingestion, cleaning, exploratory summaries, seasonal
+trends, hourly usage, and station-level hotspots.</p>
+<hr />
+</div>
+<div id="data-import-and-assembly" class="section level1">
+<h1>Data Import and Assembly</h1>
+<div class="section-divider">
+
+</div>
+<div id="load-packages" class="section level2">
+<h2>Load packages</h2>
+<pre class="r"><code>knitr::opts_chunk$set(
+  echo = TRUE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 5
+)
+
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(lubridate)
+  library(scales)
+  library(glue)
+  library(knitr)
+  library(readr)
+  library(purrr)
+  library(dplyr)
+})</code></pre>
+<p>Dataset source: <a href="https://citibikenyc.com/system-data"
+class="uri">https://citibikenyc.com/system-data</a><br />
+Columns include:<br />
+<code>ride_id</code>, <code>rideable_type</code>,
+<code>started_at</code>, <code>ended_at</code>, station names/IDs,
+coordinates, and membership status.</p>
+<hr />
+</div>
+<div id="data-cleaning" class="section level2">
+<h2>Data Cleaning</h2>
+<div class="section-divider">
+
+</div>
+<div id="prepare-output-paths" class="section level3">
+<h3>Prepare output paths</h3>
+<pre class="r"><code>RAW_DIR &lt;- params$raw_dir
+OUT_DIR &lt;- params$out_dir
+OUT_FILE &lt;- file.path(OUT_DIR, params$out_file)
+
+dir.create(OUT_DIR, showWarnings = FALSE, recursive = TRUE)</code></pre>
+</div>
+<div id="column-specification-and-reading" class="section level3">
+<h3>Column specification and reading</h3>
+<pre class="r"><code>col_spec &lt;- cols(
+  ride_id            = col_character(),
+  rideable_type      = col_character(),
+  started_at         = col_character(),
+  ended_at           = col_character(),
+  start_station_name = col_character(),
+  start_station_id   = col_character(),
+  end_station_name   = col_character(),
+  end_station_id     = col_character(),
+  start_lat          = col_double(),
+  start_lng          = col_double(),
+  end_lat            = col_double(),
+  end_lng            = col_double(),
+  member_casual      = col_character()
+)
+
+file_list &lt;- list.files(RAW_DIR, pattern = &quot;\\.csv$&quot;, full.names = TRUE)
+stopifnot(length(file_list) &gt; 0)
+
+citibike_raw &lt;- file_list %&gt;%
+  map(~ read_csv(.x, col_types = col_spec, progress = TRUE)) %&gt;%
+  bind_rows()</code></pre>
+</div>
+<div id="clean-and-keep-2023-only" class="section level3">
+<h3>Clean and keep 2023 only</h3>
+<pre class="r"><code>citibike_clean &lt;- citibike_raw %&gt;%
+  mutate(
+    started_at = ymd_hms(started_at, quiet = TRUE),
+    ended_at   = ymd_hms(ended_at, quiet = TRUE),
+    duration_min = as.numeric(difftime(ended_at, started_at, units = &quot;mins&quot;)),
+    duration_hr  = duration_min / 60,
+    date      = as_date(started_at),
+    month_lab = factor(month(started_at, label = TRUE, abbr = TRUE),
+                       levels = month.abb, ordered = TRUE),
+    wday_lab  = factor(wday(started_at, label = TRUE, abbr = TRUE),
+                       levels = c(&quot;Sun&quot;,&quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,&quot;Thu&quot;,&quot;Fri&quot;,&quot;Sat&quot;), ordered = TRUE),
+    hour      = hour(started_at),
+    member_casual = tolower(member_casual)
+  ) %&gt;%
+  filter(
+    duration_min &gt;= 1,
+    duration_min &lt;= 360,
+    !is.na(start_station_name),
+    !is.na(end_station_name)
+  ) %&gt;%
+  distinct(ride_id, .keep_all = TRUE)
+
+# Save cleaned file
+readr::write_csv(citibike_clean, OUT_FILE)</code></pre>
+<hr />
+</div>
+</div>
+</div>
+<div id="exploratory-data-analysis" class="section level1">
+<h1>Exploratory Data Analysis</h1>
+<div class="section-divider">
+
+</div>
+<div id="monthly-rides-by-user-type" class="section level2">
+<h2>Monthly Rides by User Type</h2>
+<pre class="r"><code>rides_by_month_user &lt;- citibike_clean %&gt;%
+  count(month_lab, member_casual, name = &quot;rides&quot;) %&gt;%
+  mutate(month_lab = factor(month_lab, levels = month.abb, ordered = TRUE))
+
+ggplot(rides_by_month_user,
+       aes(x = month_lab, y = rides, fill = member_casual)) +
+  geom_col(position = &quot;dodge&quot;) +
+  scale_y_continuous(labels = label_number(scale_cut = cut_si(&quot; &quot;))) +
+  labs(
+    title = &quot;Monthly rides by user type (2023)&quot;,
+    x = NULL, y = &quot;Rides&quot;, fill = &quot;User Type&quot;
+  ) +
+  theme_minimal(base_size = 12)</code></pre>
+<div class="figure-container">
+<p><img src="images/users1.png" style="width:100%; max-width:900px; border-radius:6px;"></p>
+</div>
+<p>Seasonal variation is strong:<br />
+- Usage rises sharply from spring to summer (Apr–Sep), peaking in
+July/August.<br />
+- Member rides dominate year-round, reflecting commuter behavior.<br />
+- Casual riders show strong seasonality tied to weather and tourism.</p>
+<hr />
+</div>
+<div id="weekday-vs-weekend-hourly-pattern" class="section level2">
+<h2>Weekday vs Weekend &amp; Hourly Pattern</h2>
+<pre class="r"><code>rides_by_wday_hour &lt;- citibike_clean %&gt;%
+  mutate(is_weekend = wday_lab %in% c(&quot;Sat&quot;,&quot;Sun&quot;)) %&gt;%
+  mutate(is_weekend = factor(is_weekend, levels = c(FALSE, TRUE), labels = c(&quot;Weekday&quot;,&quot;Weekend&quot;))) %&gt;%
+  count(is_weekend, hour, member_casual, name = &quot;rides&quot;)
+
+ggplot(rides_by_wday_hour,
+       aes(x = hour, y = rides, color = member_casual, group = member_casual)) +
+  geom_line() +
+  facet_wrap(~ is_weekend) +
+  scale_y_continuous(labels = label_number(scale_cut = cut_si(&quot; &quot;))) +
+  scale_x_continuous(breaks = seq(0, 23, 3)) +
+  labs(
+    title = &quot;Hourly rides by weekday/weekend and user type&quot;,
+    x = &quot;Hour of day&quot;, y = &quot;Rides&quot;, color = &quot;User Type&quot;
+  ) +
+  theme_minimal(base_size = 12)</code></pre>
+<div class="figure-container">
+<p><img src="images/users2.png" style="width:100%; max-width:900px; border-radius:6px;"></p>
+</div>
+<ul>
+<li>Weekdays show strong <strong>commuter peaks</strong> at 8 AM &amp; 6
+PM.<br />
+</li>
+<li>Weekends show smoother all-day activity, with casual riders
+dominating afternoon hours.<br />
+</li>
+<li>Night rides (12–4 AM) tend to have longer durations.</li>
+</ul>
+<hr />
+</div>
+<div id="rideable-type-mix" class="section level2">
+<h2>Rideable Type Mix</h2>
+<pre class="r"><code>rideable_mix &lt;- citibike_clean %&gt;%
+  count(rideable_type, member_casual, name = &quot;rides&quot;) %&gt;%
+  group_by(member_casual) %&gt;%
+  mutate(pct = rides / sum(rides)) %&gt;%
+  ungroup()
+
+ggplot(rideable_mix, aes(x = member_casual, y = pct, fill = rideable_type)) +
+  geom_col(position = &quot;fill&quot;) +
+  scale_y_continuous(labels = percent_format()) +
+  labs(
+    title = &quot;Rideable type composition by user type&quot;,
+    x = &quot;User type&quot;, y = &quot;Share&quot;, fill = &quot;Rideable type&quot;
+  ) +
+  theme_minimal(base_size = 12)</code></pre>
+<div class="figure-container">
+<p><img src="images/users3.png" style="width:100%; max-width:900px; border-radius:6px;"></p>
+</div>
+<p>Bike-type preference is nearly identical across user groups.<br />
+Both members and casual riders use electric and classic bikes in similar
+proportions.</p>
+<hr />
+</div>
+</div>
+<div id="station-hotspots" class="section level1">
+<h1>Station Hotspots</h1>
+<div class="section-divider">
+
+</div>
+<div id="top-15-start-end-stations" class="section level2">
+<h2>Top 15 Start &amp; End Stations</h2>
+<pre class="r"><code>top_start &lt;- citibike_clean %&gt;%
+  count(start_station_name, sort = TRUE, name = &quot;rides&quot;) %&gt;%
+  slice_head(n = 15)
+
+top_end &lt;- citibike_clean %&gt;%
+  count(end_station_name, sort = TRUE, name = &quot;rides&quot;) %&gt;%
+  slice_head(n = 15)
+
+kable(top_start, caption = &quot;Top 15 start stations (by rides)&quot;)
+kable(top_end, caption = &quot;Top 15 end stations (by rides)&quot;)</code></pre>
+<div id="bar-charts" class="section level3">
+<h3>Bar Charts</h3>
+<pre class="r"><code>ggplot(top_start, aes(x = reorder(start_station_name, rides), y = rides)) +
+  geom_col() +
+  coord_flip() +
+  scale_y_continuous(labels = label_number(scale_cut = cut_si(&quot; &quot;))) +
+  labs(title = &quot;Top 15 Start Stations (2023)&quot;, x = NULL, y = &quot;Rides&quot;) +
+  theme_minimal(base_size = 11)</code></pre>
+<div class="figure-container">
+<p><img src="images/users4.png" style="width:100%; max-width:900px; border-radius:6px;"></p>
+</div>
+<pre class="r"><code>ggplot(top_end, aes(x = reorder(end_station_name, rides), y = rides)) +
+  geom_col() +
+  coord_flip() +
+  scale_y_continuous(labels = label_number(scale_cut = cut_si(&quot; &quot;))) +
+  labs(title = &quot;Top 15 End Stations (2023)&quot;, x = NULL, y = &quot;Rides&quot;) +
+  theme_minimal(base_size = 11)</code></pre>
+<div class="figure-container">
+<p><img src="images/users5.png" style="width:100%; max-width:900px; border-radius:6px;"></p>
+</div>
+<hr />
+</div>
+</div>
+<div id="most-common-od-pairs" class="section level2">
+<h2>Most Common O–D Pairs</h2>
+<pre class="r"><code>top_od &lt;- citibike_clean %&gt;%
+  count(start_station_name, end_station_name, sort = TRUE, name = &quot;rides&quot;) %&gt;%
+  filter(!is.na(start_station_name), !is.na(end_station_name)) %&gt;%
+  slice_head(n = 20)
+
+kable(top_od, caption = &quot;Top 20 Origin-Destination (O-D) pairs&quot;)</code></pre>
+<div class="figure-container">
+<p><img src="images/users6.png" style="width:100%; max-width:900px; border-radius:6px;"></p>
+</div>
+<ul>
+<li>High-volume O–D trips cluster around <strong>Central Park</strong>,
+<strong>Hudson River Park</strong>, and <strong>Midtown</strong>.<br />
+</li>
+<li>Many are <strong>loops</strong>, indicating sightseeing and
+recreational riding.<br />
+</li>
+<li>Others reflect short-distance commuting in Financial District and
+Hudson Yards.<br />
+</li>
+<li>Understanding these patterns guides station rebalancing and capacity
+planning.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
